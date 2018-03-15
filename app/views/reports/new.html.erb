@@ -1,0 +1,28 @@
+<%= form_for(@report) do |f| %>
+  <div class="field">
+    <%= f.label :chatwork_api %>
+    <br>
+    <%= f.select :chatwork_api_id, @chatwork_apis.collect { |cw| [ cw.name, cw.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :room %>
+    <br>
+    <%= f.select :room_id %>
+  </div>
+  <div class="field">
+    <%= f.label :problems %>
+    <br>
+    <%= f.text_area :problems %>
+  </div>
+  <div class="field">
+    <%= f.label :next_day_plan %>
+    <br>
+    <%= f.text_area :next_day_plan %>
+  </div>
+  <div class="field">
+    <%= f.label :free_comment %>
+    <br>
+    <%= f.text_area :free_comment %>
+  </div>
+  <%= f.submit "Send Report", class: "btn btn-primary" %>
+<% end %>
