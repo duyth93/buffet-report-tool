@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315141828) do
+ActiveRecord::Schema.define(version: 20180316170044) do
 
   create_table "chatwork_apis", force: :cascade do |t|
     t.string "api"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "report_details", force: :cascade do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180315141828) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "chatwork_api_id"
+    t.integer "user_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -42,6 +44,7 @@ ActiveRecord::Schema.define(version: 20180315141828) do
     t.integer "chatwork_room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

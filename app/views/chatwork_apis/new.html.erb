@@ -1,2 +1,8 @@
-<h1>ChatworkApis#new</h1>
-<p>Find me in app/views/chatwork_apis/new.html.erb</p>
+<%= form_for @chatwork_api do |f|  %>
+  <div class="field">
+    <%= f.label :api %>
+    <br>
+    <%= f.text_field :api %>
+  </div>
+  <%= f.submit "Create api", class: "btn btn-primary" %>
+<% end %>

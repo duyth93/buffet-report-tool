@@ -2,12 +2,14 @@
   <div class="field">
     <%= f.label :chatwork_api %>
     <br>
-    <%= f.select :chatwork_api_id, @chatwork_apis.collect { |cw| [ cw.name, cw.id ] } %>
+    <%= f.text_field :chatwork_api_id, value: @chatwork_api.api, disabled: true %>
+    <%= link_to "Add new API", new_chatwork_apis_path %>
   </div>
   <div class="field">
     <%= f.label :room %>
     <br>
-    <%= f.select :room_id %>
+    <%= f.select :room_id, @rooms.collect { |room| [ room.name, room.id ] } %>
+    <%= link_to "Add new Room", new_rooms_path %>
   </div>
   <div class="field">
     <%= f.label :problems %>
