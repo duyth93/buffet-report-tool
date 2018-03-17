@@ -15,14 +15,18 @@ class ReportsController < ApplicationController
   end
 
   def new
-  	@report = Report.new
+    last_report = current_user.reports.last
+  	@report = last_report.present? ? last_report.deep_clone(include: :report_details)
+ : Report.new
+    3.times { @report.report_details.build } if last_report.nil?
     @rooms = current_user.rooms.order(id: :desc)
   end
 
   private
 
   def report_params
-    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id)
+    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id,
+      report_details_attributes: [:task, :actual, :percent])
   end
 
   def get_chatwork_api
@@ -30,9 +34,17 @@ class ReportsController < ApplicationController
   end
 
   def build_body(report)
+    today_tasks = actual = ""
+    report.report_details.each_with_index do |detail, index|
+      today_tasks += "- #000#{index + 1}: #{detail.task}\n"
+      actual += "- #000#{index + 1}: #{detail.percent}% (#{detail.actual})\n"
+    end
     "
+[To:637950] Nguyen Van Tan
 ◆ Today tasks
+#{today_tasks}
 ◆ Actual
+#{actual}
 ◆ Problems and Issues
 #{@report.problems}
 ◆ Next day plan
