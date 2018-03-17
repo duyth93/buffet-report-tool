@@ -1,5 +1,5 @@
 class Report < ApplicationRecord
-  belongs_to :chatwork_api_id
-  belongs_to :room_id
+  belongs_to :chatwork_api
+  belongs_to :room
   has_many :report_details
 end
