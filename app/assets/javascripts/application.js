@@ -14,7 +14,6 @@
 //= require turbolinks
 //= require jquery3
 //= require jquery_ujs
-//= require report
 //= require_tree .
 
 $(function(){
