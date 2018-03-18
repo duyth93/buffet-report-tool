@@ -15,3 +15,24 @@
 //= require jquery3
 //= require jquery_ujs
 //= require_tree .
+
+$(function(){
+  $(document).on('click', '.btn-delete-report-detail', function(e){
+    e.preventDefault();
+    $(this).parent().remove();
+  });
+
+  $(document).on('click', '#btn-add-report-detail', function(e){
+    e.preventDefault();
+    var newId = new Date().getTime();
+    var regexp = new RegExp("new_report_details", "g")
+    var content = $(this).parent().find('#report-detail-template').clone().html();
+    $(this).parent().append(content.replace(regexp, newId));
+  });
+
+  $(document).on('click', '#btn-submit', function(e) {
+    e.preventDefault();
+    $('#report-detail-template').remove();
+    $('form#new_report').submit();
+  });
+});

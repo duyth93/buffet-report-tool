@@ -1,30 +1,50 @@
-<%= form_for(@report) do |f| %>
-  <div class="field">
-    <%= f.label :chatwork_api %>
+<div class="report-form">
+  <%= link_to "GO HOME", root_url %>
+  <br><br>
+  <%= form_for(@report) do |f| %>
+    <div class="field">
+      <b><%= f.label :chatwork_api %></b>
+      <br>
+      <%= f.text_field :chatwork_api_id, value: @chatwork_api.api, disabled: true %>
+      <%= link_to "Add new API", new_chatwork_apis_path %>
+    </div>
     <br>
-    <%= f.text_field :chatwork_api_id, value: @chatwork_api.api, disabled: true %>
-    <%= link_to "Add new API", new_chatwork_apis_path %>
-  </div>
-  <div class="field">
-    <%= f.label :room %>
+    <div class="field">
+      <b><%= f.label :room %></b>
+      <br>
+      <%= f.select :room_id, @rooms.collect { |room| [ room.name, room.id ] } %>
+      <%= link_to "Add new Room", new_rooms_path %>
+    </div>
     <br>
-    <%= f.select :room_id, @rooms.collect { |room| [ room.name, room.id ] } %>
-    <%= link_to "Add new Room", new_rooms_path %>
-  </div>
-  <div class="field">
-    <%= f.label :problems %>
+    <div class="field">
+      <b><%= f.label "Task - Actual - Percent" %></b>
+      <br>
+      <%= link_to "Add row", '#', id: "btn-add-report-detail" %>
+      <%= f.fields_for :report_details do |builder| %>
+        <%= render "report_detail_form", ff: builder %>
+      <% end %>
+      <div id="report-detail-template" style="display: none;">
+        <%= render_report_detail_template(f) %>
+      </div>
+    </div>
     <br>
-    <%= f.text_area :problems %>
-  </div>
-  <div class="field">
-    <%= f.label :next_day_plan %>
+    <div class="field">
+      <b><%= f.label :problems %></b>
+      <br>
+      <%= f.text_area :problems %>
+    </div>
     <br>
-    <%= f.text_area :next_day_plan %>
-  </div>
-  <div class="field">
-    <%= f.label :free_comment %>
+    <div class="field">
+      <b><%= f.label :next_day_plan %></b>
+      <br>
+      <%= f.text_area :next_day_plan %>
+    </div>
     <br>
-    <%= f.text_area :free_comment %>
-  </div>
-  <%= f.submit "Send Report", class: "btn btn-primary" %>
-<% end %>
+    <div class="field">
+      <b><%= f.label :free_comment %></b>
+      <br>
+      <%= f.text_area :free_comment %>
+    </div>
+    <%= f.submit "Send Report", id: "btn-submit" %>
+  <% end %>
+</div>

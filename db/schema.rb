@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316170044) do
+ActiveRecord::Schema.define(version: 20180317174344) do
 
   create_table "chatwork_apis", force: :cascade do |t|
     t.string "api"
@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(version: 20180316170044) do
 
   create_table "report_details", force: :cascade do |t|
     t.string "task"
-    t.string "actual"
+    t.text "actual"
     t.integer "report_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "percent"
   end
 
   create_table "reports", force: :cascade do |t|
