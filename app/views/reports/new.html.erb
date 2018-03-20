@@ -5,7 +5,7 @@
     <div class="field">
       <b><%= f.label :chatwork_api %></b>
       <br>
-      <%= f.text_field :chatwork_api_id, value: @chatwork_api.api, disabled: true %>
+      <%= f.text_field :chatwork_api_id, value: @chatwork_api&.api, disabled: true %>
       <%= link_to "Add new API", new_chatwork_apis_path %>
     </div>
     <br>
