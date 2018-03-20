@@ -12,15 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20180317174344) do
 
-  create_table "chatwork_apis", force: :cascade do |t|
+  create_table "chatwork_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "api"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
   end
 
-  create_table "report_details", force: :cascade do |t|
+  create_table "report_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "task"
     t.text "actual"
     t.integer "report_id"
@@ -29,7 +28,7 @@ ActiveRecord::Schema.define(version: 20180317174344) do
     t.integer "percent"
   end
 
-  create_table "reports", force: :cascade do |t|
+  create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "problems"
     t.text "next_day_plan"
     t.text "free_comment"
@@ -40,7 +39,7 @@ ActiveRecord::Schema.define(version: 20180317174344) do
     t.integer "user_id"
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "chatwork_room_id"
     t.datetime "created_at", null: false
@@ -48,7 +47,7 @@ ActiveRecord::Schema.define(version: 20180317174344) do
     t.integer "user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
