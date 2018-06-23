@@ -1,0 +1,9 @@
+ @import "bootstrap";
+
+.report-form input[type=text], .report-form input[type=number], .report-form textarea {
+  background-color: #ebebe4;
+}
+
+.report-form input:focus[type=text], .report-form input:focus[type=number], .report-form textarea:focus {
+  background-color: white;
+}

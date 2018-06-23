@@ -10,11 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require angular/lib/angular.min
+//= require angular/common
+//= require angular/lib/angular-animate.min
+//= require angular/lib/angular-cookies.min
+//= require angular/lib/angular-messages.min
+//= require angular/lib/angular-sanitize.min
 //= require rails-ujs
 //= require turbolinks
 //= require jquery3
 //= require jquery_ujs
-//= require_tree .
+//= require popper
+//= require bootstrap-sprockets
+//= require_tree ./angular/app
 
 $(function(){
   $(document).on('click', '.btn-delete-report-detail', function(e){
