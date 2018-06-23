@@ -8,7 +8,16 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body ng-app="app" ng-strict-di>
-    <%= yield %>
+  <body ng-app="app" ng-strict-di class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top"
+    ng-controller="ReportController as $ctrl">
+    <% if current_user %>
+      <%= render "layouts/nav" %>
+    <% end %>
+    <div class="content-wrapper">
+      <%= yield %>
+      <% if current_user %>
+        <%= render "layouts/footer" %>
+      <% end %>
+    </div>
   </body>
 </html>
