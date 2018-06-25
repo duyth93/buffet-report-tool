@@ -42,6 +42,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'mysql2', '0.4.8'
+  gem "pry-byebug"
+  gem "pry-rails"
 end
 
 group :development do

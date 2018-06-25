@@ -6,6 +6,7 @@ angular.module('commonLib')
   .factory('common', ['$http', '$q', function($http, $q){
     return {
       ajaxCall: function(method, url, params, cache) {
+        var HIDDEN_PARAM_METHODS = ["POST", "PUT"];
         var def = $q.defer();
         var formData = {method: method, url: url, cache: cache};
         var dataParam = {params: params};

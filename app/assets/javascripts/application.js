@@ -21,9 +21,11 @@
 //= require jquery3
 //= require jquery_ujs
 //= require popper
-//= require bootstrap-sprockets
+//= require popper
+//= require lodash.min
 //= require_tree ./angular/app
 //= require_tree ./angular/controllers
+//= require_tree ./angular/services
 //= require bootstrap_sb_admin_base_v2
 
 $(function(){
