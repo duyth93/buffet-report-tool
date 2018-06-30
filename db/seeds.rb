@@ -35,4 +35,3 @@ TO ALL >>>
 
 Template.create content: default_mazrica_template, is_default: true, name: "Default Mazrica"
 Template.create content: default_lawson_template, is_default: true, name: "Default Lawson"
-ChatworkApi.create api: "155fb61664cf4752f74b19085dcb36fe"
