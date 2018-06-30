@@ -3,8 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :registerable,
          :omniauthable, omniauth_providers: %i(chatwork)
-  has_many :chatwork_apis
-  has_many :rooms
   has_many :reports
 
   def self.find_for_oauth(auth)

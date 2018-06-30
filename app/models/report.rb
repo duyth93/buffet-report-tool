@@ -1,5 +1,4 @@
 class Report < ApplicationRecord
-  belongs_to :chatwork_api, optional: true
   belongs_to :template
   belongs_to :user
   has_many :report_details
