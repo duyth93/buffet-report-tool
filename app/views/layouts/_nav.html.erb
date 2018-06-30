@@ -6,10 +6,10 @@
   <div class=" navbar-collapse hide-nav-bar" id="navbar">
     <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-        <a class="nav-link" href="<%= root_url %>">
+        <%= link_to root_url, method: :get, class: "nav-link" do %>
           <i class="fa fa-fw fa-dashboard"></i>
           <span class="nav-link-text">Dashboard</span>
-        </a>
+        <% end %>
       </li>
     </ul>
     <ul class="navbar-nav sidenav-toggler">

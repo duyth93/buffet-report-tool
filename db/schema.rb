@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630045802) do
+ActiveRecord::Schema.define(version: 20180630091155) do
 
   create_table "chatwork_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "api"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20180630045802) do
     t.integer "chatwork_api_id"
     t.integer "user_id"
     t.integer "template_id"
+    t.string "to_id"
   end
 
   create_table "templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

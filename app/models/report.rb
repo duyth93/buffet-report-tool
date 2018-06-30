@@ -1,21 +1,24 @@
 class Report < ApplicationRecord
   belongs_to :chatwork_api, optional: true
   belongs_to :template
+  belongs_to :user
   has_many :report_details
   accepts_nested_attributes_for :report_details,
     reject_if: proc { |attr| attr[:task].blank? || attr[:percent].blank? }
+  attr_accessor :to_name
 
   def send_chatwork_msg chatwork_api
-    ChatWork.api_key = chatwork_api
+    self.user.refresh_token_if_expired
     ChatWork::Message.create(room_id: self.room_id,
                              body: build_body)
   end
 
   def build_body
-    result = self.template.content
-    result.gsub!(/{{problems}}/, self.problems)
-    result.gsub!(/{{next_day_plan}}/, self.next_day_plan)
-    result.gsub!(/{{free_comment}}/, self.free_comment)
+    result = "[To:#{self.to_id}] #{self.to_name}" if self.to_id
+    result << self.template.content
+    result.gsub!(/{{problems}}/, self.problems.to_s)
+    result.gsub!(/{{next_day_plan}}/, self.next_day_plan.to_s)
+    result.gsub!(/{{free_comment}}/, self.free_comment.to_s)
     result.gsub!(/{{today}}/, Time.now.strftime('%d/%m/%Y'))
     task_details_templates = result.scan(/(?<=({{task-list}}))([\d\D]*?)(?=({{\/task-list}}))/).map do |res|
       res[1]

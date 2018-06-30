@@ -19,17 +19,17 @@ class ReportsController < ApplicationController
   end
 
   def new
-    last_report = current_user.reports.last
-  	@report = last_report.present? ? last_report.deep_clone(include: :report_details) : Report.new
+    @last_report = current_user.reports.last
+  	@report = @last_report.present? ? @last_report.deep_clone(include: :report_details) : Report.new
     @templates = Template.all
-    @rooms = @chatwork_api.list_room
+    @rooms = current_user.list_room
   end
 
   private
 
   def report_params
-    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id,
-      :template_id, report_details_attributes: [:task, :actual, :percent])
+    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id, :to_id, :to_name,
+      :template_id, report_details_attributes: [:task, :actual, :percent]).merge(user_id: current_user.id)
   end
 
   def get_chatwork_api

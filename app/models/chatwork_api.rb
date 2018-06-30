@@ -3,7 +3,7 @@ class ChatworkApi < ApplicationRecord
   has_many :reports
 
   def list_room
-    ChatWork.api_key = self.api
+    ChatWork.access_token = self.user.access_token
     result = ChatWork::Room.get
     result.select{|room| room[:type] == 'group'} if result
   end

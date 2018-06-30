@@ -1,5 +1,4 @@
 default_mazrica_template = '
-[To:637915] ☢☭ Nguyen Thanh Linh ☭☢(2008)
 ◆ Today tasks
 {{task-list}}
 - #{{index}}: {{task}}
