@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317174344) do
+ActiveRecord::Schema.define(version: 20180630091155) do
 
   create_table "chatwork_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "api"
@@ -37,14 +37,14 @@ ActiveRecord::Schema.define(version: 20180317174344) do
     t.datetime "updated_at", null: false
     t.integer "chatwork_api_id"
     t.integer "user_id"
+    t.integer "template_id"
+    t.string "to_id"
   end
 
-  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "content"
+    t.boolean "is_default"
     t.string "name"
-    t.integer "chatwork_room_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -53,6 +53,11 @@ ActiveRecord::Schema.define(version: 20180317174344) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "remember_created_at"
+    t.string "uid"
+    t.string "provider"
+    t.text "access_token"
+    t.text "refresh_token"
+    t.datetime "expired_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

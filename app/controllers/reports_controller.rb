@@ -5,52 +5,34 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = current_user.reports.build(report_params)
-    @report.chatwork_api = @chatwork_api
-    @report.save!
-    ChatWork.api_key = @report.chatwork_api.api
-    ChatWork::Message.create(room_id: @report.room.chatwork_room_id,
-                             body: build_body(@report))
-    redirect_to root_url
+    respond_to do |format|
+      format.json do
+        @report = current_user.reports.build(report_params)
+        status = @report.save
+        @report.send_chatwork_msg @chatwork_api.api
+        render json: {
+          status: status,
+          redirect_path: root_path
+        }
+      end
+    end
   end
 
   def new
-    last_report = current_user.reports.last
-  	@report = last_report.present? ? last_report.deep_clone(include: :report_details)
- : Report.new
-    3.times { @report.report_details.build } if last_report.nil?
-    @rooms = current_user.rooms.order(id: :desc)
+    @last_report = current_user.reports.last
+  	@report = @last_report.present? ? @last_report.deep_clone(include: :report_details) : Report.new
+    @templates = Template.all
+    @rooms = current_user.list_room
   end
 
   private
 
   def report_params
-    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id,
-      report_details_attributes: [:task, :actual, :percent])
+    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id, :to_id, :to_name,
+      :template_id, report_details_attributes: [:task, :actual, :percent]).merge(user_id: current_user.id)
   end
 
   def get_chatwork_api
-    @chatwork_api = current_user.chatwork_apis.order(id: :desc).first
-  end
-
-  def build_body(report)
-    today_tasks = actual = ""
-    report.report_details.each_with_index do |detail, index|
-      today_tasks += "- #000#{index + 1}: #{detail.task}\n"
-      actual += "- #000#{index + 1}: #{detail.percent}% (#{detail.actual})\n"
-    end
-    "
-[To:637950] Nguyen Van Tan
-◆ Today tasks
-#{today_tasks}
-◆ Actual
-#{actual}
-◆ Problems and Issues
-#{@report.problems}
-◆ Next day plan
-#{@report.next_day_plan}
-◆ Free Comment
-#{@report.free_comment}
-    "
+    @chatwork_api = ChatworkApi.first
   end
 end

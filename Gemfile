@@ -29,9 +29,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'
+gem 'omniauth-oauth2', '1.5.0'
+gem 'omniauth-chatwork'
 gem 'jquery-rails'
 gem 'chatwork'
 gem 'deep_cloneable', '~> 2.3.0'
+gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap_sb_admin_base_v2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -40,6 +44,9 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'mysql2', '0.4.8'
+  gem "pry-byebug"
+  gem "pry-rails"
+  gem 'thin'
 end
 
 group :development do
