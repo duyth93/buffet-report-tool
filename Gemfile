@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'
+gem 'omniauth-oauth2', '1.5.0'
+gem 'omniauth-chatwork'
 gem 'jquery-rails'
 gem 'chatwork'
 gem 'deep_cloneable', '~> 2.3.0'
@@ -44,6 +46,7 @@ group :development, :test do
   gem 'mysql2', '0.4.8'
   gem "pry-byebug"
   gem "pry-rails"
+  gem 'thin'
 end
 
 group :development do

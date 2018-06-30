@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180624154617) do
+ActiveRecord::Schema.define(version: 20180630045802) do
 
   create_table "chatwork_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "api"
@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 20180624154617) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "remember_created_at"
+    t.string "uid"
+    t.string "provider"
+    t.text "access_token"
+    t.text "refresh_token"
+    t.datetime "expired_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
