@@ -1,2 +1,0 @@
-class ChatworkApi < ApplicationRecord
-end

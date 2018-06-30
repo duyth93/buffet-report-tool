@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20180630091155) do
 
-  create_table "chatwork_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "api"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "report_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "task"
     t.text "actual"
@@ -35,7 +28,6 @@ ActiveRecord::Schema.define(version: 20180630091155) do
     t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "chatwork_api_id"
     t.integer "user_id"
     t.integer "template_id"
     t.string "to_id"
