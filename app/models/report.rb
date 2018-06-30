@@ -6,7 +6,7 @@ class Report < ApplicationRecord
     reject_if: proc { |attr| attr[:task].blank? || attr[:percent].blank? }
   attr_accessor :to_name
 
-  def send_chatwork_msg chatwork_api
+  def send_chatwork_msg
     self.user.refresh_token_if_expired
     ChatWork::Message.create(room_id: self.room_id,
                              body: build_body)

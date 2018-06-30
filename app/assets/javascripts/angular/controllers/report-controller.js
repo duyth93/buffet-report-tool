@@ -37,14 +37,16 @@ angular.module('app')
 
     _this.sendReport = function() {
       _this.report.report_details_attributes = [];
-      _this.report.taskDetails.split('\n').forEach(function(details) {
-        var detailsArr = details.split(";");
-        _this.report.report_details_attributes.push({
-          task: detailsArr[0],
-          percent: detailsArr[1],
-          actual: detailsArr[2]
+      if (!_.isEmpty(_this.report.taskDetails)) {
+        _this.report.taskDetails.split('\n').forEach(function(details) {
+          var detailsArr = details.split(";");
+          _this.report.report_details_attributes.push({
+            task: detailsArr[0],
+            percent: detailsArr[1],
+            actual: detailsArr[2]
+          });
         });
-      });
+      }
 
       reportService.post({report: _this.report}).then(function(res) {
         if (res.data.status) {

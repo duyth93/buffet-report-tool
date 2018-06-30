@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
       format.json do
         @report = current_user.reports.build(report_params)
         status = @report.save
-        @report.send_chatwork_msg @chatwork_api.api
+        @report.send_chatwork_msg
         render json: {
           status: status,
           redirect_path: root_path
