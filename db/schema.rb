@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630091155) do
+ActiveRecord::Schema.define(version: 20180701145700) do
+
+  create_table "chatwork_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "api"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "report_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "task"
@@ -21,6 +28,13 @@ ActiveRecord::Schema.define(version: 20180630091155) do
     t.integer "percent"
   end
 
+  create_table "report_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "content"
+    t.boolean "is_default"
+    t.string "name"
+    t.integer "user_id"
+  end
+
   create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "problems"
     t.text "next_day_plan"
@@ -28,15 +42,11 @@ ActiveRecord::Schema.define(version: 20180630091155) do
     t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "chatwork_api_id"
     t.integer "user_id"
-    t.integer "template_id"
+    t.integer "report_template_id"
     t.string "to_id"
-  end
-
-  create_table "templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "content"
-    t.boolean "is_default"
-    t.string "name"
+    t.string "from_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

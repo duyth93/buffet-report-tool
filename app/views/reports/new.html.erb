@@ -1,80 +1,13 @@
 <span id="report" data-infos="<%= @last_report.nil? ? {} : @last_report.to_json %>"></span>
 <span id="report_details" data-infos="<%= @report.report_details.to_json %>"></span>
+<span id="templates" data-infos="<%= @templates.to_json %>"></span>
 <div class="container-fluid" ng-controller="ReportController as $ctrl">
+  <%= render "edit_template_modal" %>
   <div class="card mb-3">
     <div class="card-header">
       <i class="fa fa-area-chart"></i>Report form</div>
     <div class="card-body">
-      <%= form_for(@report) do |f| %>
-        <div class="form-group row">
-          <%= f.label :room, class: "col-sm-2 col-form-label" %>
-          <div class="col-sm-10">
-            <%= f.select :room_id, @rooms.collect { |room| [ room.name, room.id || room.room_id ] }, {},
-              {class: "form-control form-control-lg", "ng-model": "$ctrl.report.room_id"} %>
-          </div>
-        </div>
-
-        <%= f.hidden_field :to_name, value: "{{$ctrl.report.to_name}}" %>
-
-        <div class="form-group row">
-          <%= f.label "To", class: "col-sm-2 col-form-label" %>
-          <div class="col-sm-10">
-            <select class="form-control form-control-lg" ng-model="$ctrl.report.to_id">
-              <option ng-selected="member.account_id == $ctrl.report.to_id"
-                ng-repeat="member in $ctrl.members" value="{{member.account_id}}"
-                ng-bind="member.name"></option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <%= f.label "Task - Percent - Actual", class: "col-sm-2 col-form-label" %>
-          <div class="col-sm-10">
-            <textarea id="task-percent-actual" class="form-control" rows="5" cols="20"
-              placeholder="Exp:&#10;task1;20;doing&#10;task2;100;done"
-              ng-model="$ctrl.report.taskDetails"></textarea>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <%= f.label :problems, class: "col-sm-2 col-form-label" %>
-          <div class="col-sm-10">
-            <%= f.text_area :problems, class: "form-control", rows: "3",
-              "ng-model": "$ctrl.report.problems" %>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <%= f.label :next_day_plan, class: "col-sm-2 col-form-label" %>
-          <div class="col-sm-10">
-            <%= f.text_area :next_day_plan, class: "form-control", rows: "3",
-              "ng-model": "$ctrl.report.next_day_plan" %>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <%= f.label :free_comment, class: "col-sm-2 col-form-label" %>
-          <div class="col-sm-10">
-            <%= f.text_area :free_comment, class: "form-control", rows: "3",
-              "ng-model": "$ctrl.report.free_comment" %>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <%= f.label "Template", class: "col-sm-2 col-form-label" %>
-          <div class="col-sm-10">
-            <%= f.select :template_id, @templates.collect { |temp| [ temp.name, temp.id ] }, {},
-              {class: "form-control form-control-lg", "ng-model": "$ctrl.report.template_id"} %>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <button type="button" class="col-md-4 btn btn-primary col-md-offset-4"
-            ng-click="$ctrl.sendReport()">
-            Send Report
-          </button>
-        </div>
-      <% end %>
+      <%= render "form" %>
     </div>
     <div class="card-footer small text-muted"></div>
   </div>

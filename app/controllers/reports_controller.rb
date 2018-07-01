@@ -1,7 +1,4 @@
 class ReportsController < ApplicationController
-  def index
-  end
-
   def create
     respond_to do |format|
       format.json do
@@ -19,14 +16,16 @@ class ReportsController < ApplicationController
   def new
     @last_report = current_user.reports.last
   	@report = @last_report.present? ? @last_report.deep_clone(include: :report_details) : Report.new
-    @templates = Template.all
+    @templates = ReportTemplate.default.or(current_user.report_templates).select(:name, :id, :is_default)
     @rooms = current_user.list_room
+    @current_user = current_user
   end
 
   private
 
   def report_params
     params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id, :to_id, :to_name,
-      :template_id, report_details_attributes: [:task, :actual, :percent]).merge(user_id: current_user.id)
+      :from_id, :from_name, :report_template_id, report_details_attributes: [:task, :actual, :percent])
+      .merge(user_id: current_user.id)
   end
 end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :registerable,
          :omniauthable, omniauth_providers: %i(chatwork)
   has_many :reports
+  has_many :report_templates
 
   def self.find_for_oauth(auth)
     user = User.find_by(email: auth.info.email)

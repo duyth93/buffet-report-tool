@@ -1,10 +1,10 @@
 class Report < ApplicationRecord
-  belongs_to :template
+  belongs_to :report_template
   belongs_to :user
   has_many :report_details
   accepts_nested_attributes_for :report_details,
     reject_if: proc { |attr| attr[:task].blank? || attr[:percent].blank? }
-  attr_accessor :to_name
+  attr_accessor :to_name, :from_name
 
   def send_chatwork_msg
     self.user.refresh_token_if_expired
@@ -13,8 +13,10 @@ class Report < ApplicationRecord
   end
 
   def build_body
-    result = "[To:#{self.to_id}] #{self.to_name}" if self.to_id
-    result << self.template.content
+    result = ""
+    result = "REPORTER: [To:#{self.from_id}] #{self.from_name}\n" if self.from_id
+    result << "[To:#{self.to_id}] #{self.to_name}" if self.to_id
+    result << self.report_template.content
     result.gsub!(/{{problems}}/, self.problems.to_s)
     result.gsub!(/{{next_day_plan}}/, self.next_day_plan.to_s)
     result.gsub!(/{{free_comment}}/, self.free_comment.to_s)
