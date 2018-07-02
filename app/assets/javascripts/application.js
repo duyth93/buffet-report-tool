@@ -16,6 +16,7 @@
 //= require angular/lib/angular-cookies.min
 //= require angular/lib/angular-messages.min
 //= require angular/lib/angular-sanitize.min
+//= require angular/lib/toaster.min
 //= require rails-ujs
 //= require turbolinks
 //= require jquery3
@@ -63,9 +64,5 @@ $(function(){
 
   $(document).on("click", "#toggle-nav", function(e) {
     $("#navbar").toggleClass("hide-nav-bar", "show");
-  });
-
-  $(".select2-dropdown").select2({
-      theme: "bootstrap"
   });
 });
