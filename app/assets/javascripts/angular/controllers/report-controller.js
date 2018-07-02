@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app')
-  .controller('ReportController', ['reportService', 'chatworkService', 'templateService', '$window', '$scope',
-    function(reportService, chatworkService, templateService, $window, $scope) {
+  .controller('ReportController', ['reportService', 'chatworkService', 'templateService', '$window', '$scope', 'toaster',
+    function(reportService, chatworkService, templateService, $window, $scope, toaster) {
     var _this = this;
     _this.$scope = $scope;
     _this.report = $('#report').data('infos');
@@ -48,6 +48,7 @@ angular.module('app')
     };
 
     _this.sendReport = function() {
+      _this.is_sending = true;
       _this.report.report_details_attributes = [];
       if (!_.isEmpty(_this.report.taskDetails)) {
         _this.report.taskDetails.split('\n').forEach(function(details) {
@@ -62,7 +63,8 @@ angular.module('app')
 
       reportService.post({report: _this.report}).then(function(res) {
         if (res.data.status) {
-          $window.location.href = res.data.redirect_path;
+          _this.is_sending = false;
+          toaster.pop({type: "success", body: "Send report successfully!"});
         }
       });
     };
@@ -80,6 +82,7 @@ angular.module('app')
         _this.templates = res.data.templates;
         _this.report.report_template_id = res.data.template.id;
         $("#edit-template-modal").modal("hide");
+        toaster.pop({type: "success", body: "Save template successfully!"});
       });
     };
 
@@ -89,6 +92,7 @@ angular.module('app')
         _this.templates = res.data.templates;
         _this.report.report_template_id = res.data.template.id;
         $("#edit-template-modal").modal("hide");
+        toaster.pop({type: "success", body: "Save template successfully!"});
       });
     };
 
@@ -97,6 +101,7 @@ angular.module('app')
         _this.templates = res.data.templates;
         _this.report.report_template_id = null;
         $("#edit-template-modal").modal("hide");
+        toaster.pop({type: "success", body: "Delete template successfully!"});
       });
     };
   }]);

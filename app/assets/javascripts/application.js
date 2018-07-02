@@ -16,6 +16,7 @@
 //= require angular/lib/angular-cookies.min
 //= require angular/lib/angular-messages.min
 //= require angular/lib/angular-sanitize.min
+//= require angular/lib/toaster.min
 //= require rails-ujs
 //= require turbolinks
 //= require jquery3

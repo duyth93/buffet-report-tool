@@ -2,6 +2,13 @@
 <span id="report_details" data-infos="<%= @report.report_details.to_json %>"></span>
 <span id="templates" data-infos="<%= @templates.to_json %>"></span>
 <div class="container-fluid" ng-controller="ReportController as $ctrl">
+  <div>
+    <strong>
+      <toaster-container
+        toaster-options="{'close-button': true, 'position-class': 'toast-top-right', timeout: 5000}">
+      </toaster-container>
+    </strong>
+  </div>
   <%= render "edit_template_modal" %>
   <div class="card mb-3">
     <div class="card-header">

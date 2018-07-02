@@ -43,7 +43,7 @@ class Report < ApplicationRecord
   def generate_list_to
     res = ""
     self.to_id.each_with_index do |id, index|
-      res << "\n[To:#{id}] #{self.to_name[index]}"
+      res << "\n[To:#{id}] #{self.to_name.present? ? self.to_name[index] : ''}"
     end
     res
   end
