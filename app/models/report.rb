@@ -10,7 +10,6 @@ class Report < ApplicationRecord
 
   def send_chatwork_msg
     self.user.refresh_token_if_expired
-    binding.pry
     ChatWork::Message.create(room_id: self.room_id,
                              body: build_body)
   end
