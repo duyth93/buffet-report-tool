@@ -33,5 +33,5 @@ TO ALL >>>
 [/info]
 '
 
-Template.create content: default_mazrica_template, is_default: true, name: "Default Mazrica"
-Template.create content: default_lawson_template, is_default: true, name: "Default Lawson"
+ReportTemplate.create content: default_mazrica_template, is_default: true, name: "Default Mazrica"
+ReportTemplate.create content: default_lawson_template, is_default: true, name: "Default Lawson"
