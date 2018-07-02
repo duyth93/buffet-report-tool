@@ -27,9 +27,11 @@ angular.module('app')
 
     _this.$scope.$watchGroup(["$ctrl.report.to_id", "$ctrl.members"], function() {
       if (_this.report.to_id && _this.members.length > 0) {
-        _this.report.to_name = _this.members.find(function(mem) {
-          return mem.account_id == _this.report.to_id;
-        }).name;
+        _this.report.to_name = _this.report.to_id.map(function(id) {
+          return _this.members.find(function(mem) {
+            return mem.account_id == id;
+          }).name;
+        });
       }
     });
 

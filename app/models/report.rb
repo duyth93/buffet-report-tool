@@ -6,6 +6,8 @@ class Report < ApplicationRecord
     reject_if: proc { |attr| attr[:task].blank? || attr[:percent].blank? }
   attr_accessor :to_name, :from_name
 
+  serialize :to_id, Array
+
   def send_chatwork_msg
     self.user.refresh_token_if_expired
     ChatWork::Message.create(room_id: self.room_id,
@@ -14,8 +16,8 @@ class Report < ApplicationRecord
 
   def build_body
     result = ""
-    result = "REPORTER: [To:#{self.from_id}] #{self.from_name}\n" if self.from_id
-    result << "[To:#{self.to_id}] #{self.to_name}" if self.to_id
+    result = "REPORTER: [To:#{self.from_id}] #{self.from_name}" if self.from_id
+    result << generate_list_to if self.to_id && self.to_id.length > 0
     result << self.report_template.content
     result.gsub!(/{{problems}}/, self.problems.to_s)
     result.gsub!(/{{next_day_plan}}/, self.next_day_plan.to_s)
@@ -36,5 +38,13 @@ class Report < ApplicationRecord
       result.sub!(/{{task-list}}[\d\D]*?{{\/task-list}}/, rendered_report_details)
     end
     result
+  end
+
+  def generate_list_to
+    res = ""
+    self.to_id.each_with_index do |id, index|
+      res << "\n[To:#{id}] #{self.to_name[index]}"
+    end
+    res
   end
 end

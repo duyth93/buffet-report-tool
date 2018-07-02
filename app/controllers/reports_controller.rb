@@ -24,8 +24,9 @@ class ReportsController < ApplicationController
   private
 
   def report_params
-    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id, :to_id, :to_name,
-      :from_id, :from_name, :report_template_id, report_details_attributes: [:task, :actual, :percent])
+    params.require(:report).permit(:problems, :next_day_plan, :free_comment, :room_id,
+      :from_id, :from_name, :report_template_id, to_id: [], to_name: [],
+      report_details_attributes: [:task, :actual, :percent])
       .merge(user_id: current_user.id)
   end
 end

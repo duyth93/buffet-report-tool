@@ -64,8 +64,4 @@ $(function(){
   $(document).on("click", "#toggle-nav", function(e) {
     $("#navbar").toggleClass("hide-nav-bar", "show");
   });
-
-  $(".select2-dropdown").select2({
-      theme: "bootstrap"
-  });
 });
