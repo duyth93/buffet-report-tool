@@ -21,7 +21,7 @@
     </ul>
     <ul class="navbar-nav ml-auto" style="float: right;">
       <li class="nav-item">
-        <%= link_to "<i class='fa fa-fw fa-sign-out'></i>Logout".html_safe, destroy_user_session_path,
+        <%= link_to "<i class='fa fa-fw fa-sign-out'></i>#{current_user.email} (Logout)".html_safe, destroy_user_session_path,
           method: :delete %>
       </li>
     </ul>

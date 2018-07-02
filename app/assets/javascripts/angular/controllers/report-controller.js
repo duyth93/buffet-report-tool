@@ -63,9 +63,14 @@ angular.module('app')
 
       reportService.post({report: _this.report}).then(function(res) {
         if (res.data.status) {
-          _this.is_sending = false;
           toaster.pop({type: "success", body: "Send report successfully!"});
+        } else {
+          toaster.pop({type: "error", body: "Send report failed!"});
         }
+      }, function() {
+        toaster.pop({type: "error", body: "Send report failed!"});
+      }).finally(function() {
+        _this.is_sending = false;
       });
     };
 
